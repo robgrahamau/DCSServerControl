@@ -16,7 +16,7 @@ namespace servermonitor
         // these are our base variables, really we should make a class for the DCS process holding everything
         // But i'm lazy and this is a quick program its not like i'm doing it for $$.
         // We are also redundent in a few places here.. i could just use the resource strings.. but old habits.
-        string dcspath = "J:\\Eagle Dynamics\\DCS World\\bin\\"; 
+        string dcspath = ""; 
         string srspath1 = ""; // these are not used yet... srs handling doesn't exist yet
         bool srsstart1 = false; // not used yet
         Process dcs1 = new Process(); // this is the process for the first server
@@ -61,6 +61,7 @@ namespace servermonitor
             TB_DCS_PID2.Text = "Not Started";
             TB_DCS_PID3.Text = "Not Started";
             dcspath = Properties.Settings.Default.pathtodcs;
+            textBox1.Text = Properties.Settings.Default.pathtodcs.ToString();
             cb_server1.Checked = Properties.Settings.Default.server1;
             cb_server2.Checked = Properties.Settings.Default.server2;
             cb_server3.Checked = Properties.Settings.Default.server3;

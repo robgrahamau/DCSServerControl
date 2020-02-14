@@ -8,3 +8,13 @@ d:\My Documents\Visual Studio 2017\Projects\servermonitor\servermonitor\obj\Rele
 d:\My Documents\Visual Studio 2017\Projects\servermonitor\servermonitor\obj\Release\servermonitor.exe
 d:\My Documents\Visual Studio 2017\Projects\servermonitor\servermonitor\obj\Release\servermonitor.pdb
 d:\My Documents\Visual Studio 2017\Projects\servermonitor\servermonitor\obj\Release\servermonitor.csprojAssemblyReference.cache
+G:\github\DCSServerControl\servermonitor\bin\Release\servermonitor.exe.config
+G:\github\DCSServerControl\servermonitor\bin\Release\servermonitor.exe
+G:\github\DCSServerControl\servermonitor\bin\Release\servermonitor.pdb
+G:\github\DCSServerControl\servermonitor\obj\Release\servermonitor.csprojAssemblyReference.cache
+G:\github\DCSServerControl\servermonitor\obj\Release\servermonitor.Form1.resources
+G:\github\DCSServerControl\servermonitor\obj\Release\servermonitor.Properties.Resources.resources
+G:\github\DCSServerControl\servermonitor\obj\Release\servermonitor.csproj.GenerateResource.cache
+G:\github\DCSServerControl\servermonitor\obj\Release\servermonitor.csproj.CoreCompileInputs.cache
+G:\github\DCSServerControl\servermonitor\obj\Release\servermonitor.exe
+G:\github\DCSServerControl\servermonitor\obj\Release\servermonitor.pdb
