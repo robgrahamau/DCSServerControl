@@ -18,17 +18,23 @@ namespace servermonitor
         // We are also redundent in a few places here.. i could just use the resource strings.. but old habits.
         string dcspath = ""; 
         string srspath1 = ""; // these are not used yet... srs handling doesn't exist yet
-        bool srsstart1 = false; // not used yet
+        
         Process dcs1 = new Process(); // this is the process for the first server
         bool dcs1start = false; // we started
         int dcs1pid; // process id handler
         int dcs1hangtime = 0; // how long has a hang been going?
         int dcs1uptime = 0; // how long have we been up
         int dcs1totalhangs = 0;
+        int dcs2totalhangs = 0;
+        int dcs3totalhangs = 0;
         bool hanging1 = false;
+        bool hanging2 = false;
+        bool hanging3 = false;
         int dcs1hangsrestart = 0;
+        int dcs2hangsrestart = 0;
+        int dcs3hangsrestart = 0;
         System.Windows.Forms.Timer dcs1timer = new System.Windows.Forms.Timer(); // our timer for 1
-        bool dcs1SrSStart = false; // not used yet
+       
         // same as above.. only for server 2
         Process dcs2 = new Process();
         bool dcs2start = false;
@@ -79,13 +85,16 @@ namespace servermonitor
             cb_rs1.Checked = Properties.Settings.Default.rs1;
             cb_rs2.Checked = Properties.Settings.Default.rs2;
             cb_rs3.Checked = Properties.Settings.Default.rs3;
-            TB_SRSPath.Text = Properties.Settings.Default.srspath1;
-            cb_autosrs.Checked = Properties.Settings.Default.Asrs1;
+            
             num_serveruptime.Value = Properties.Settings.Default.rsvr1;
             num_serveruptime2.Value = Properties.Settings.Default.rsvr2;
             num_serveruptime3.Value = Properties.Settings.Default.rsvr3;
             synchour.Value = Properties.Settings.Default.synchr1;
             syncminutes.Value = Properties.Settings.Default.syncmin1;
+            synchr2.Value = Properties.Settings.Default.synchr2;
+            syncmin2.Value = Properties.Settings.Default.syncmin2;
+            synchr3.Value = Properties.Settings.Default.synchr3;
+            syncmin3.Value = Properties.Settings.Default.syncmin3;
             corecount.Text = processorcount.ToString();
             dcs1timer.Tick += new EventHandler(DCS1TimerEvent);
             dcs1timer.Interval = 60000;
@@ -128,7 +137,11 @@ namespace servermonitor
         {
             dcs2uptime += 1;
             lb_uptime2.Text = dcs2uptime.ToString();
-            if ((dcs2uptime == num_serveruptime2.Value) && (num_serveruptime2.Value != 0))
+            DateTime currenttime = new DateTime();
+            currenttime = System.DateTime.Now;
+            int hour = currenttime.Hour;
+            int minutes = currenttime.Minute;
+            if (((dcs2uptime == num_serveruptime2.Value) && (num_serveruptime2.Value != 0)) || ((hour == Decimal.ToInt32(synchr2.Value)) && (minutes == Decimal.ToInt32(syncmin2.Value))))
             {
                 lb_uptime2.Text = "Restarting";
                 dcs2_stop();
@@ -146,7 +159,11 @@ namespace servermonitor
         {
             dcs3uptime += 1;
             lb_uptime3.Text = dcs3uptime.ToString();
-            if ((dcs3uptime == num_serveruptime3.Value) && (num_serveruptime3.Value != 0))
+            DateTime currenttime = new DateTime();
+            currenttime = System.DateTime.Now;
+            int hour = currenttime.Hour;
+            int minutes = currenttime.Minute;
+            if (((dcs3uptime == num_serveruptime3.Value) && (num_serveruptime3.Value != 0)) || ((hour == Decimal.ToInt32(synchr3.Value)) && (minutes == Decimal.ToInt32(syncmin3.Value))))
             {
                 lb_uptime3.Text = "Restarting";
                 dcs3_stop();
@@ -455,9 +472,18 @@ namespace servermonitor
                     dcs2hangtime = 0;
                     button2.Text = "Started";
                     tabPage2.Text = "DCS SERVER 2: Running";
+                    hanging2 = false;
                 }
                 else
                 {
+                    if (hanging2 == false)
+                    {
+                        dcs2totalhangs = dcs2totalhangs + 1;
+                        dcs2hangsrestart = dcs2hangsrestart + 1;
+                        hanging2 = true;
+                        s2nr.Text = dcs2hangsrestart.ToString();
+                        S2th.Text = dcs2totalhangs.ToString();
+                    }
                     dcs2hangtime = dcs2hangtime + 1;
                     button2.Text = "NR Time:" + dcs2hangtime.ToString() + "/" + defaulthangtime;
                     tabPage2.Text = "DCS SERVER 2: NR " + dcs2hangtime.ToString() + "/" + defaulthangtime; 
@@ -488,9 +514,18 @@ namespace servermonitor
                     dcs3hangtime = 0;
                     button3.Text = "Started";
                     tabPage3.Text = "DCS SERVER 3: Running";
+                    hanging3 = false;
                 }
                 else
                 {
+                    if (hanging3 == false)
+                    {
+                        dcs3totalhangs = dcs3totalhangs + 1;
+                        dcs3hangsrestart = dcs3hangsrestart + 1;
+                        hanging3 = true;
+                        srv3nr.Text = dcs3hangsrestart.ToString();
+                        svr3th.Text = dcs3totalhangs.ToString();
+                    }
                     dcs3hangtime = dcs3hangtime + 1;
                     button3.Text = "NR Time:" + dcs3hangtime.ToString() + "/" + defaulthangtime;
                     tabPage3.Text = "DCS SERVER 3: NR " + dcs3hangtime.ToString() + "/" + defaulthangtime;
@@ -757,7 +792,7 @@ namespace servermonitor
             DialogResult result = openFileDialog1.ShowDialog();
             if (result == DialogResult.OK)
             {
-                TB_SRSPath.Text = folderBrowserDialog1.SelectedPath.ToString();
+                
                 srspath1 = folderBrowserDialog1.SelectedPath;
                 Properties.Settings.Default.srspath1 = srspath1;
                 Properties.Settings.Default.Save();
@@ -766,18 +801,7 @@ namespace servermonitor
 
         private void cb_autosrs_CheckedChanged(object sender, EventArgs e)
         {
-            Properties.Settings.Default.Asrs1 = cb_autosrs.Checked;
-            Properties.Settings.Default.Save();
-            if (cb_autosrs.Checked == true)
-            {
-                button5.Enabled = false;
-                TB_SRSPath.Enabled = false;
-            }
-            else
-            {
-                button5.Enabled = true;
-                TB_SRSPath.Enabled = true;
-            }
+            
         }
 
         private void num_serveruptime_ValueChanged(object sender, EventArgs e)
@@ -827,6 +851,40 @@ namespace servermonitor
         }
 
         private void caffin_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void synchr2_ValueChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.synchr2 = Decimal.ToInt32(synchr2.Value);
+            Properties.Settings.Default.Save();
+        }
+
+        private void syncmin2_ValueChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.syncmin2 = Decimal.ToInt32(syncmin2.Value);
+            Properties.Settings.Default.Save();
+        }
+
+        private void synchr3_ValueChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.synchr3 = Decimal.ToInt32(synchr3.Value);
+            Properties.Settings.Default.Save();
+        }
+
+        private void syncmin3_ValueChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.syncmin3 = Decimal.ToInt32(syncmin3.Value);
+            Properties.Settings.Default.Save();
+        }
+
+        private void tableLayoutPanel4_Paint(object sender, PaintEventArgs e)
         {
 
         }
