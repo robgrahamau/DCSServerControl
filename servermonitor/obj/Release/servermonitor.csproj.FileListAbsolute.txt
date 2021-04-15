@@ -18,3 +18,13 @@ G:\github\DCSServerControl\servermonitor\obj\Release\servermonitor.csproj.Genera
 G:\github\DCSServerControl\servermonitor\obj\Release\servermonitor.csproj.CoreCompileInputs.cache
 G:\github\DCSServerControl\servermonitor\obj\Release\servermonitor.exe
 G:\github\DCSServerControl\servermonitor\obj\Release\servermonitor.pdb
+F:\github\dcs\DCSServerControl\servermonitor\bin\Release\servermonitor.exe.config
+F:\github\dcs\DCSServerControl\servermonitor\bin\Release\servermonitor.exe
+F:\github\dcs\DCSServerControl\servermonitor\bin\Release\servermonitor.pdb
+F:\github\dcs\DCSServerControl\servermonitor\obj\Release\servermonitor.csprojAssemblyReference.cache
+F:\github\dcs\DCSServerControl\servermonitor\obj\Release\servermonitor.Form1.resources
+F:\github\dcs\DCSServerControl\servermonitor\obj\Release\servermonitor.Properties.Resources.resources
+F:\github\dcs\DCSServerControl\servermonitor\obj\Release\servermonitor.csproj.GenerateResource.cache
+F:\github\dcs\DCSServerControl\servermonitor\obj\Release\servermonitor.csproj.CoreCompileInputs.cache
+F:\github\dcs\DCSServerControl\servermonitor\obj\Release\servermonitor.exe
+F:\github\dcs\DCSServerControl\servermonitor\obj\Release\servermonitor.pdb

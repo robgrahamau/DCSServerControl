@@ -424,33 +424,11 @@ namespace servermonitor
             curtime.Text = "Current Time:" + currenttime.Hour.ToString() + "hrs " + currenttime.Minute.ToString() + "minutes";
             if (dcs1start == true)
             {
-               if (dcs1.Responding == true)
-                {
+
                     dcs1hangtime = 0;
                     button1.Text = "Started";
                     tabPage1.Text = "DCS SERVER 1: Running";
                     hanging1 = false;
-                }
-               else
-                {
-                    if (hanging1 == false)
-                    {
-                        dcs1totalhangs = dcs1totalhangs + 1;
-                        dcs1hangsrestart = dcs1hangsrestart + 1;
-                        hanging1 = true;
-                        S1PA.Text = dcs1hangsrestart.ToString();
-                        PP.Text = dcs1totalhangs.ToString();
-                    }
-                    dcs1hangtime = dcs1hangtime + 1;
-                    button1.Text = "NR Time:" + dcs1hangtime.ToString() + "/" + defaulthangtime;
-                    tabPage1.Text = "DCS SERVER 1: NR Time" + dcs1hangtime.ToString() + "/" + defaulthangtime; 
-                    if (dcs1hangtime >= defaulthangtime)
-                    {
-                        dcs1.Kill();
-                        dcs1_start();
-                    }
-                }
-
             }
             else
             {
@@ -474,25 +452,6 @@ namespace servermonitor
                     tabPage2.Text = "DCS SERVER 2: Running";
                     hanging2 = false;
                 }
-                else
-                {
-                    if (hanging2 == false)
-                    {
-                        dcs2totalhangs = dcs2totalhangs + 1;
-                        dcs2hangsrestart = dcs2hangsrestart + 1;
-                        hanging2 = true;
-                        s2nr.Text = dcs2hangsrestart.ToString();
-                        S2th.Text = dcs2totalhangs.ToString();
-                    }
-                    dcs2hangtime = dcs2hangtime + 1;
-                    button2.Text = "NR Time:" + dcs2hangtime.ToString() + "/" + defaulthangtime;
-                    tabPage2.Text = "DCS SERVER 2: NR " + dcs2hangtime.ToString() + "/" + defaulthangtime; 
-                    if (dcs2hangtime >= defaulthangtime)
-                    {
-                        dcs2.Kill();
-                        dcs2_start();
-                    }
-                }
 
             }
             else
@@ -515,25 +474,6 @@ namespace servermonitor
                     button3.Text = "Started";
                     tabPage3.Text = "DCS SERVER 3: Running";
                     hanging3 = false;
-                }
-                else
-                {
-                    if (hanging3 == false)
-                    {
-                        dcs3totalhangs = dcs3totalhangs + 1;
-                        dcs3hangsrestart = dcs3hangsrestart + 1;
-                        hanging3 = true;
-                        srv3nr.Text = dcs3hangsrestart.ToString();
-                        svr3th.Text = dcs3totalhangs.ToString();
-                    }
-                    dcs3hangtime = dcs3hangtime + 1;
-                    button3.Text = "NR Time:" + dcs3hangtime.ToString() + "/" + defaulthangtime;
-                    tabPage3.Text = "DCS SERVER 3: NR " + dcs3hangtime.ToString() + "/" + defaulthangtime;
-                    if (dcs3hangtime >= defaulthangtime)
-                    {
-                        dcs3.Kill();
-                        dcs3_start();
-                    }
                 }
 
             }
