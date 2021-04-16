@@ -85,7 +85,7 @@ namespace servermonitor
             cb_rs1.Checked = Properties.Settings.Default.rs1;
             cb_rs2.Checked = Properties.Settings.Default.rs2;
             cb_rs3.Checked = Properties.Settings.Default.rs3;
-            
+            cb_nonresponsive.Checked = Properties.Settings.Default.noresponse;
             num_serveruptime.Value = Properties.Settings.Default.rsvr1;
             num_serveruptime2.Value = Properties.Settings.Default.rsvr2;
             num_serveruptime3.Value = Properties.Settings.Default.rsvr3;
@@ -95,6 +95,7 @@ namespace servermonitor
             syncmin2.Value = Properties.Settings.Default.syncmin2;
             synchr3.Value = Properties.Settings.Default.synchr3;
             syncmin3.Value = Properties.Settings.Default.syncmin3;
+            cb_forced.Checked = Properties.Settings.Default.forced;
             corecount.Text = processorcount.ToString();
             dcs1timer.Tick += new EventHandler(DCS1TimerEvent);
             dcs1timer.Interval = 60000;
@@ -119,7 +120,8 @@ namespace servermonitor
             currenttime = System.DateTime.Now;
             int hour = currenttime.Hour;
             int minutes = currenttime.Minute;
-            if (((dcs1uptime == num_serveruptime.Value) && (num_serveruptime.Value != 0)) || ((hour == Decimal.ToInt32(synchour.Value)) && (minutes == Decimal.ToInt32(syncminutes.Value))))
+
+            if (((dcs1uptime == num_serveruptime.Value) && (num_serveruptime.Value != 0)) || ((hour == Decimal.ToInt32(synchour.Value)) && (cb_forced.Checked == true) && (minutes == Decimal.ToInt32(syncminutes.Value))))
             {
                 lb_uptime1.Text = "Restarting";
                 dcs1_stop();
@@ -141,7 +143,7 @@ namespace servermonitor
             currenttime = System.DateTime.Now;
             int hour = currenttime.Hour;
             int minutes = currenttime.Minute;
-            if (((dcs2uptime == num_serveruptime2.Value) && (num_serveruptime2.Value != 0)) || ((hour == Decimal.ToInt32(synchr2.Value)) && (minutes == Decimal.ToInt32(syncmin2.Value))))
+            if (((dcs2uptime == num_serveruptime2.Value) && (num_serveruptime2.Value != 0)) || ((hour == Decimal.ToInt32(synchr2.Value)) && (cb_forced.Checked == true) && (minutes == Decimal.ToInt32(syncmin2.Value))))
             {
                 lb_uptime2.Text = "Restarting";
                 dcs2_stop();
@@ -163,7 +165,7 @@ namespace servermonitor
             currenttime = System.DateTime.Now;
             int hour = currenttime.Hour;
             int minutes = currenttime.Minute;
-            if (((dcs3uptime == num_serveruptime3.Value) && (num_serveruptime3.Value != 0)) || ((hour == Decimal.ToInt32(synchr3.Value)) && (minutes == Decimal.ToInt32(syncmin3.Value))))
+            if (((dcs3uptime == num_serveruptime3.Value) && (num_serveruptime3.Value != 0)) || ((hour == Decimal.ToInt32(synchr3.Value)) && (cb_forced.Checked == true) && (minutes == Decimal.ToInt32(syncmin3.Value))))
             {
                 lb_uptime3.Text = "Restarting";
                 dcs3_stop();
@@ -186,13 +188,20 @@ namespace servermonitor
         {
             try
             {
-                if (dcs1start == false)
+                if (tb_savefolder1.Text == "")
                 {
-                    dcs1_start();
+                    MessageBox.Show("Unable to start Server as you have no valid save game folder \n please enter a valid save folder.");
                 }
                 else
                 {
-                    dcs1_stop();
+                    if (dcs1start == false)
+                    {
+                        dcs1_start();
+                    }
+                    else
+                    {
+                        dcs1_stop();
+                    }
                 }
             }
             catch(Exception ex)
@@ -424,11 +433,42 @@ namespace servermonitor
             curtime.Text = "Current Time:" + currenttime.Hour.ToString() + "hrs " + currenttime.Minute.ToString() + "minutes";
             if (dcs1start == true)
             {
-
+                if (cb_nonresponsive.Checked == true)
+                { 
+                    if (dcs1.Responding == true) 
+                    {
+                        dcs1hangtime = 0;
+                        button1.Text = "Started";
+                        tabPage1.Text = "DCS SERVER 1: Running";
+                        hanging1 = false;
+                    }
+                    else
+                    {
+                        if (hanging1 == false)
+                        {
+                            dcs1totalhangs = dcs1totalhangs + 1;
+                            dcs1hangsrestart = dcs1hangsrestart + 1;
+                            hanging1 = true;
+                            S1PA.Text = dcs1hangsrestart.ToString();
+                            PP.Text = dcs1totalhangs.ToString();
+                        }
+                        dcs1hangtime = dcs1hangtime + 1;
+                        button1.Text = "NR Time:" + dcs1hangtime.ToString() + "/" + defaulthangtime;
+                        tabPage1.Text = "DCS SERVER 1: NR Time" + dcs1hangtime.ToString() + "/" + defaulthangtime;
+                        if (dcs1hangtime >= defaulthangtime)
+                        {
+                            dcs1.Kill();
+                            dcs1_start();
+                        }
+                    }
+                }
+                else
+                {
                     dcs1hangtime = 0;
                     button1.Text = "Started";
                     tabPage1.Text = "DCS SERVER 1: Running";
                     hanging1 = false;
+                }
             }
             else
             {
@@ -445,14 +485,42 @@ namespace servermonitor
 
             if (dcs2start == true)
             {
-                if (dcs2.Responding == true)
+                if (cb_nonresponsive.Checked == true)
                 {
-                    dcs2hangtime = 0;
-                    button2.Text = "Started";
-                    tabPage2.Text = "DCS SERVER 2: Running";
-                    hanging2 = false;
+                    if (dcs2.Responding == true)
+                    {
+                        dcs2hangtime = 0;
+                        button2.Text = "Started";
+                        tabPage2.Text = "DCS SERVER 2: Running";
+                        hanging2 = false;
+                    }
+                    else
+                    {
+                        if (hanging2 == false)
+                        {
+                            dcs2totalhangs = dcs2totalhangs + 1;
+                            dcs2hangsrestart = dcs2hangsrestart + 1;
+                            hanging2 = true;
+                            s2nr.Text = dcs2hangsrestart.ToString();
+                            S2th.Text = dcs2totalhangs.ToString();
+                        }
+                        dcs2hangtime = dcs2hangtime + 1;
+                        button2.Text = "NR Time:" + dcs2hangtime.ToString() + "/" + defaulthangtime;
+                        tabPage2.Text = "DCS SERVER 2: NonResponsive Time" + dcs2hangtime.ToString() + "/" + defaulthangtime;
+                        if (dcs2hangtime >= defaulthangtime)
+                        {
+                            dcs2.Kill();
+                            dcs2_start();
+                        }
+                    }
                 }
-
+                else
+                {
+                        dcs2hangtime = 0;
+                        button2.Text = "Started";
+                        tabPage2.Text = "DCS SERVER 2: Running";
+                        hanging2 = false;
+                }
             }
             else
             {
@@ -468,14 +536,42 @@ namespace servermonitor
 
             if (dcs3start == true)
             {
-                if (dcs3.Responding == true)
+                if (cb_nonresponsive.Checked == true)
                 {
-                    dcs3hangtime = 0;
-                    button3.Text = "Started";
-                    tabPage3.Text = "DCS SERVER 3: Running";
-                    hanging3 = false;
+                    if (dcs3.Responding == true)
+                    {
+                        dcs3hangtime = 0;
+                        button3.Text = "Started";
+                        tabPage3.Text = "DCS SERVER 3: Running";
+                        hanging3 = false;
+                    }
+                    else
+                    {
+                        if (hanging3 == false)
+                        {
+                            dcs3totalhangs = dcs3totalhangs + 1;
+                            dcs3hangsrestart = dcs3hangsrestart + 1;
+                            hanging3 = true;
+                            srv3nr.Text = dcs3hangsrestart.ToString();
+                            svr3th.Text = dcs3totalhangs.ToString();
+                        }
+                        dcs3hangtime = dcs3hangtime + 1;
+                        button3.Text = "NR Time:" + dcs3hangtime.ToString() + "/" + defaulthangtime;
+                        tabPage2.Text = "DCS SERVER 3: NonResponsive Time" + dcs3hangtime.ToString() + "/" + defaulthangtime;
+                        if (dcs3hangtime >= defaulthangtime)
+                        {
+                            dcs3.Kill();
+                            dcs3_start();
+                        }
+                    }
                 }
-
+                else
+                {
+                        dcs3hangtime = 0;
+                        button3.Text = "Started";
+                        tabPage3.Text = "DCS SERVER 3: Running";
+                        hanging3 = false;
+                }
             }
             else
             {
@@ -588,13 +684,20 @@ namespace servermonitor
         {
             try
             {
-                if (dcs2start == false)
+                if (tb_savefolder2.Text == "")
                 {
-                    dcs2_start();
+                    MessageBox.Show("Unable to start Server as you have no valid save game folder \n please enter a valid save folder.");
                 }
                 else
                 {
-                    dcs2_stop();
+                    if (dcs2start == false)
+                    {
+                        dcs2_start();
+                    }
+                    else
+                    {
+                        dcs2_stop();
+                    }
                 }
             }
             catch (Exception ex)
@@ -607,13 +710,20 @@ namespace servermonitor
         {
             try
             {
-                if (dcs3start == false)
+                if (tb_savefolder3.Text == "")
                 {
-                    dcs3_start();
+                    MessageBox.Show("Unable to start Server as you have no valid save game folder \n please enter a valid save folder.");
                 }
                 else
                 {
-                    dcs3_stop();
+                    if (dcs3start == false)
+                    {
+                        dcs3_start();
+                    }
+                    else
+                    {
+                        dcs3_stop();
+                    }
                 }
             }
             catch (Exception ex)
@@ -706,10 +816,17 @@ namespace servermonitor
                 DialogResult dr = MessageBox.Show("Activing this will Automatically start the server instantly, please make certain you have everything filled in", "Are you certain?", MessageBoxButtons.YesNo);
                 if (dr == DialogResult.Yes)
                 {
-                    cb_rs3.Checked = true;
-                    num_serveruptime3.Enabled = false;
-                    Properties.Settings.Default.rs3 = cb_rs3.Checked;
-                    Properties.Settings.Default.Save();
+                    if (tb_savefolder3.Text == "")
+                    {
+                        MessageBox.Show("Unable to start Save Folder is EMPTY Enter the save folder name in SAVED GAMES");
+                    }
+                    else
+                    {
+                        cb_rs3.Checked = true;
+                        num_serveruptime3.Enabled = false;
+                        Properties.Settings.Default.rs3 = cb_rs3.Checked;
+                        Properties.Settings.Default.Save();
+                    }
                 }
                 else
                 {
@@ -827,6 +944,19 @@ namespace servermonitor
         private void tableLayoutPanel4_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void cb_forced_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.forced = cb_forced.Checked;
+            Properties.Settings.Default.Save();
+        }
+
+        private void cb_nonresponsive_CheckedChanged(object sender, EventArgs e)
+        {
+            MessageBox.Show("Be Aware DCS 2.7.0.46250 does not support this for some reason \n Advise setting it FALSE (OFF)");
+            Properties.Settings.Default.noresponse = cb_nonresponsive.Checked;
+            Properties.Settings.Default.Save();
         }
     }
 }
