@@ -121,7 +121,7 @@ namespace servermonitor
             int hour = currenttime.Hour;
             int minutes = currenttime.Minute;
 
-            if (((dcs1uptime == num_serveruptime.Value) && (num_serveruptime.Value != 0)) || ((hour == Decimal.ToInt32(synchour.Value)) && (cb_forced.Checked == true) && (minutes == Decimal.ToInt32(syncminutes.Value))))
+            if (((dcs1uptime == num_serveruptime.Value) && (num_serveruptime.Value != 0)) || ((hour == Decimal.ToInt32(synchour.Value)) && (cb_server1forcerestart.Checked == true) && (cb_forced.Checked == true) && (minutes == Decimal.ToInt32(syncminutes.Value))))
             {
                 lb_uptime1.Text = "Restarting";
                 dcs1_stop();
@@ -143,7 +143,7 @@ namespace servermonitor
             currenttime = System.DateTime.Now;
             int hour = currenttime.Hour;
             int minutes = currenttime.Minute;
-            if (((dcs2uptime == num_serveruptime2.Value) && (num_serveruptime2.Value != 0)) || ((hour == Decimal.ToInt32(synchr2.Value)) && (cb_forced.Checked == true) && (minutes == Decimal.ToInt32(syncmin2.Value))))
+            if (((dcs2uptime == num_serveruptime2.Value) && (num_serveruptime2.Value != 0)) || ((hour == Decimal.ToInt32(synchr2.Value)) && (cb_server2forcerestart.Checked == true) && (cb_forced.Checked == true) && (minutes == Decimal.ToInt32(syncmin2.Value))))
             {
                 lb_uptime2.Text = "Restarting";
                 dcs2_stop();
@@ -165,7 +165,7 @@ namespace servermonitor
             currenttime = System.DateTime.Now;
             int hour = currenttime.Hour;
             int minutes = currenttime.Minute;
-            if (((dcs3uptime == num_serveruptime3.Value) && (num_serveruptime3.Value != 0)) || ((hour == Decimal.ToInt32(synchr3.Value)) && (cb_forced.Checked == true) && (minutes == Decimal.ToInt32(syncmin3.Value))))
+            if (((dcs3uptime == num_serveruptime3.Value) && (num_serveruptime3.Value != 0)) || ((hour == Decimal.ToInt32(synchr3.Value)) && (cb_server3forcerestart.Checked == true) && (cb_forced.Checked == true) && (minutes == Decimal.ToInt32(syncmin3.Value))))
             {
                 lb_uptime3.Text = "Restarting";
                 dcs3_stop();

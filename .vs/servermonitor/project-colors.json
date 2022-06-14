@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "32e6c370-c018-4bb7-af4f-ccf897d403d1": {
+      "ProjectGuid": "32e6c370-c018-4bb7-af4f-ccf897d403d1",
+      "DisplayName": "servermonitor",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}
