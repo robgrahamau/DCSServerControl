@@ -275,7 +275,14 @@ namespace servermonitor
         void dcs1_stop()
         {
             // does what it says, kills the process, updates the UI resets uptime and kills the timer.
-            dcs1.Kill();
+            try
+            {
+                dcs1.Kill();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("exception {0}", e.Message);
+            }
             button1.Text = "Stopped";
             tabPage1.Text = "DCS SERVER 1: Stopped";
             dcs1start = false;
@@ -345,7 +352,14 @@ namespace servermonitor
         }
         void dcs2_stop()
         {
-            dcs2.Kill();
+            try
+            {
+                dcs2.Kill();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("exception {0}", e.Message);
+            }
             button2.Text = "Stopped";
             tabPage2.Text = "DCS SERVER 2: Stopped";
             dcs2start = false;
@@ -392,7 +406,7 @@ namespace servermonitor
             dcs3.StartInfo.Arguments = aserver + " " + anorender + " " + awebgui + " " + asaved;
             dcs3start = dcs3.Start();
             dcs3pid = dcs3.Id;
-            TB_DCS_PID3.Text = dcs1pid.ToString();
+            TB_DCS_PID3.Text = dcs3pid.ToString();
             if (dcs3start == true)
             {
                 button3.Text = "Started";
@@ -410,7 +424,14 @@ namespace servermonitor
         }
         void dcs3_stop()
         {
-            dcs3.Kill();
+            try
+            {
+                dcs3.Kill();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("exception {0}", e.Message);
+            }
             button3.Text = "Stopped";
             tabPage3.Text = "DCS SERVER 3: Stopped";
             dcs3start = false;
@@ -457,7 +478,16 @@ namespace servermonitor
                         tabPage1.Text = "DCS SERVER 1: NR Time" + dcs1hangtime.ToString() + "/" + defaulthangtime;
                         if (dcs1hangtime >= defaulthangtime)
                         {
-                            dcs1.Kill();
+                            try
+                            {
+                                dcs1.Kill();
+                            }
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine("exception {0}", ex.Message);
+                            }
+
+                            
                             dcs1_start();
                         }
                     }
@@ -509,7 +539,14 @@ namespace servermonitor
                         tabPage2.Text = "DCS SERVER 2: NonResponsive Time" + dcs2hangtime.ToString() + "/" + defaulthangtime;
                         if (dcs2hangtime >= defaulthangtime)
                         {
-                            dcs2.Kill();
+                            try
+                            {
+                                dcs2.Kill();
+                            }
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine("exception {0}", ex.Message);
+                            }
                             dcs2_start();
                         }
                     }
@@ -560,7 +597,14 @@ namespace servermonitor
                         tabPage2.Text = "DCS SERVER 3: NonResponsive Time" + dcs3hangtime.ToString() + "/" + defaulthangtime;
                         if (dcs3hangtime >= defaulthangtime)
                         {
-                            dcs3.Kill();
+                            try
+                            {
+                                dcs3.Kill();
+                            }
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine("exception {0}", ex.Message);
+                            }
                             dcs3_start();
                         }
                     }

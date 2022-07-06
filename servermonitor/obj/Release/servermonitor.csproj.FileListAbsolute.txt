@@ -27,5 +27,4 @@ F:\github\dcs\DCSServerControl\servermonitor\obj\Release\servermonitor.csproj.Ge
 F:\github\dcs\DCSServerControl\servermonitor\obj\Release\servermonitor.csproj.CoreCompileInputs.cache
 F:\github\dcs\DCSServerControl\servermonitor\obj\Release\servermonitor.exe
 F:\github\dcs\DCSServerControl\servermonitor\obj\Release\servermonitor.pdb
-F:\github\dcs\DCSServerControl\servermonitor\obj\Release\servermonitor.csproj.AssemblyReference.cache
-F:\github\dcs\DCSServerControl\servermonitor\obj\Release\servermonitor.csproj.SuggestedBindingRedirects.cache
+F:\github\dcs\DCSServerControl\servermonitor\obj\Release\servermonitor.csprojAssemblyReference.cache
