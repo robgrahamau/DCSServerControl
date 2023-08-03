@@ -164,6 +164,7 @@
             this.textBox1.Size = new System.Drawing.Size(236, 20);
             this.textBox1.TabIndex = 1;
             this.textBox1.Text = "C:\\Program Files\\Eagle Dynamics\\DCS World\\bin\\";
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // tb_savefolder2
             // 
@@ -1516,7 +1517,7 @@
             this.ClientSize = new System.Drawing.Size(1046, 637);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "Form1";
-            this.Text = "Rob\'s DCS Server Manager V0.6";
+            this.Text = "Rob\'s DCS Server Manager V0.6.1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();

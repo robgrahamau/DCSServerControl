@@ -28,3 +28,14 @@ F:\github\dcs\DCSServerControl\servermonitor\obj\Debug\servermonitor.csproj.Gene
 F:\github\dcs\DCSServerControl\servermonitor\obj\Debug\servermonitor.csproj.CoreCompileInputs.cache
 F:\github\dcs\DCSServerControl\servermonitor\obj\Debug\servermonitor.exe
 F:\github\dcs\DCSServerControl\servermonitor\obj\Debug\servermonitor.pdb
+E:\GITHUBSTORAGE\DCSServerControl\servermonitor\bin\Debug\servermonitor.exe.config
+E:\GITHUBSTORAGE\DCSServerControl\servermonitor\bin\Debug\servermonitor.exe
+E:\GITHUBSTORAGE\DCSServerControl\servermonitor\bin\Debug\servermonitor.pdb
+E:\GITHUBSTORAGE\DCSServerControl\servermonitor\obj\Debug\servermonitor.csproj.AssemblyReference.cache
+E:\GITHUBSTORAGE\DCSServerControl\servermonitor\obj\Debug\servermonitor.csproj.SuggestedBindingRedirects.cache
+E:\GITHUBSTORAGE\DCSServerControl\servermonitor\obj\Debug\servermonitor.Form1.resources
+E:\GITHUBSTORAGE\DCSServerControl\servermonitor\obj\Debug\servermonitor.Properties.Resources.resources
+E:\GITHUBSTORAGE\DCSServerControl\servermonitor\obj\Debug\servermonitor.csproj.GenerateResource.cache
+E:\GITHUBSTORAGE\DCSServerControl\servermonitor\obj\Debug\servermonitor.csproj.CoreCompileInputs.cache
+E:\GITHUBSTORAGE\DCSServerControl\servermonitor\obj\Debug\servermonitor.exe
+E:\GITHUBSTORAGE\DCSServerControl\servermonitor\obj\Debug\servermonitor.pdb

@@ -219,10 +219,10 @@ namespace servermonitor
         {
             //make our path and set up our extensions
             if (Properties.Settings.Default.dedicated == false)
-            { dcs1.StartInfo.FileName = dcspath + "\\dcs.exe";  }
+            { dcs1.StartInfo.FileName = dcspath + "\\bin\\dcs.exe";  }
             else
             {
-              dcs1.StartInfo.FileName = dcspath + "\\DCS_Server.exe";
+              dcs1.StartInfo.FileName = dcspath + "\\bin\\DCS_Server.exe";
             }
             
             string aserver = "";
@@ -252,19 +252,25 @@ namespace servermonitor
             
             dcs1.StartInfo.Arguments = aserver + " " + anorender + " " + awebgui + " " + asaved;
             // now we done that start the damned hting and store the process.
-            dcs1start = dcs1.Start();
-            dcs1pid = dcs1.Id;
-            // put it to text and update the ui.
-            TB_DCS_PID1.Text = dcs1pid.ToString();
-            if (dcs1start == true)
+            try
             {
-                button1.Text = "Started";
-                tabPage1.Text = "DCS SERVER 1: Started";
-            }
-            else
+                dcs1start = dcs1.Start();
+                dcs1pid = dcs1.Id;
+                // put it to text and update the ui.
+                TB_DCS_PID1.Text = dcs1pid.ToString();
+                if (dcs1start == true)
+                {
+                    button1.Text = "Started";
+                    tabPage1.Text = "DCS SERVER 1: Started";
+                }
+                else
+                {
+                    button1.Text = "Stopped";
+                    tabPage1.Text = "DCS SERVER 1: Stopped";
+                }
+            }catch(Exception ex)
             {
-                button1.Text = "Stopped";
-                tabPage1.Text = "DCS SERVER 1: Stopped";
+                MessageBox.Show("Exception please tell rob \n" + ex.ToString());
             }
             //  we want events to trigger especially exited! and we want to reset uptime and start the timer.
             dcs1hangsrestart = 0;
@@ -288,6 +294,7 @@ namespace servermonitor
             catch (Exception e)
             {
                 Console.WriteLine("exception {0}", e.Message);
+                MessageBox.Show("Exception please tell rob \n" + e.ToString());
             }
             button1.Text = "Stopped";
             tabPage1.Text = "DCS SERVER 1: Stopped";
@@ -312,10 +319,10 @@ namespace servermonitor
         void dcs2_start()
         {
             if (Properties.Settings.Default.dedicated == false)
-            { dcs2.StartInfo.FileName = dcspath + "\\dcs.exe"; }
+            { dcs2.StartInfo.FileName = dcspath + "\\bin\\dcs.exe"; }
             else
             {
-                dcs2.StartInfo.FileName = dcspath + "\\DCS_Server.exe";
+                dcs2.StartInfo.FileName = dcspath + "\\bin\\DCS_Server.exe";
             }
             string aserver = "";
             string anorender = "";
@@ -390,10 +397,10 @@ namespace servermonitor
         void dcs3_start()
         {
             if (Properties.Settings.Default.dedicated == false)
-            { dcs3.StartInfo.FileName = dcspath + "\\dcs.exe"; }
+            { dcs3.StartInfo.FileName = dcspath + "\\bin\\dcs.exe"; }
             else
             {
-                dcs3.StartInfo.FileName = dcspath + "\\DCS_Server.exe";
+                dcs3.StartInfo.FileName = dcspath + "\\bin\\DCS_Server.exe";
             }
             string aserver = "";
             string anorender = "";
@@ -1024,6 +1031,11 @@ namespace servermonitor
             MessageBox.Show("This sets your server to a dedicated server install \n It will look for dcs_server.exe instead of dcs.exe");
             Properties.Settings.Default.dedicated = standalone.Checked;
             Properties.Settings.Default.Save();
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
