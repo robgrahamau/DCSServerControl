@@ -218,7 +218,13 @@ namespace servermonitor
         void dcs1_start()
         {
             //make our path and set up our extensions
-            dcs1.StartInfo.FileName = dcspath + "\\dcs.exe";
+            if (Properties.Settings.Default.dedicated == false)
+            { dcs1.StartInfo.FileName = dcspath + "\\dcs.exe";  }
+            else
+            {
+              dcs1.StartInfo.FileName = dcspath + "\\DCS_Server.exe";
+            }
+            
             string aserver = "";
             string anorender = "";
             string awebgui = "";
@@ -305,7 +311,12 @@ namespace servermonitor
 
         void dcs2_start()
         {
-            dcs2.StartInfo.FileName = dcspath + "\\dcs.exe";
+            if (Properties.Settings.Default.dedicated == false)
+            { dcs2.StartInfo.FileName = dcspath + "\\dcs.exe"; }
+            else
+            {
+                dcs2.StartInfo.FileName = dcspath + "\\DCS_Server.exe";
+            }
             string aserver = "";
             string anorender = "";
             string awebgui = "";
@@ -378,7 +389,12 @@ namespace servermonitor
 
         void dcs3_start()
         {
-            dcs3.StartInfo.FileName = dcspath + "\\dcs.exe";
+            if (Properties.Settings.Default.dedicated == false)
+            { dcs3.StartInfo.FileName = dcspath + "\\dcs.exe"; }
+            else
+            {
+                dcs3.StartInfo.FileName = dcspath + "\\DCS_Server.exe";
+            }
             string aserver = "";
             string anorender = "";
             string awebgui = "";
@@ -1000,6 +1016,13 @@ namespace servermonitor
         {
             MessageBox.Show("Be Aware DCS 2.7.0.46250 does not support this for some reason \n Advise setting it FALSE (OFF)");
             Properties.Settings.Default.noresponse = cb_nonresponsive.Checked;
+            Properties.Settings.Default.Save();
+        }
+
+        private void standalone_CheckedChanged(object sender, EventArgs e)
+        {
+            MessageBox.Show("This sets your server to a dedicated server install \n It will look for dcs_server.exe instead of dcs.exe");
+            Properties.Settings.Default.dedicated = standalone.Checked;
             Properties.Settings.Default.Save();
         }
     }

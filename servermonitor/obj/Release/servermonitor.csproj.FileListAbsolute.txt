@@ -28,3 +28,14 @@ F:\github\dcs\DCSServerControl\servermonitor\obj\Release\servermonitor.csproj.Co
 F:\github\dcs\DCSServerControl\servermonitor\obj\Release\servermonitor.exe
 F:\github\dcs\DCSServerControl\servermonitor\obj\Release\servermonitor.pdb
 F:\github\dcs\DCSServerControl\servermonitor\obj\Release\servermonitor.csprojAssemblyReference.cache
+E:\GITHUBSTORAGE\DCSServerControl\servermonitor\obj\Release\servermonitor.csproj.AssemblyReference.cache
+E:\GITHUBSTORAGE\DCSServerControl\servermonitor\obj\Release\servermonitor.csproj.SuggestedBindingRedirects.cache
+E:\GITHUBSTORAGE\DCSServerControl\servermonitor\obj\Release\servermonitor.Form1.resources
+E:\GITHUBSTORAGE\DCSServerControl\servermonitor\obj\Release\servermonitor.Properties.Resources.resources
+E:\GITHUBSTORAGE\DCSServerControl\servermonitor\obj\Release\servermonitor.csproj.GenerateResource.cache
+E:\GITHUBSTORAGE\DCSServerControl\servermonitor\obj\Release\servermonitor.csproj.CoreCompileInputs.cache
+E:\GITHUBSTORAGE\DCSServerControl\servermonitor\obj\Release\servermonitor.exe
+E:\GITHUBSTORAGE\DCSServerControl\servermonitor\obj\Release\servermonitor.pdb
+E:\GITHUBSTORAGE\DCSServerControl\servermonitor\bin\Release\servermonitor.exe.config
+E:\GITHUBSTORAGE\DCSServerControl\servermonitor\bin\Release\servermonitor.exe
+E:\GITHUBSTORAGE\DCSServerControl\servermonitor\bin\Release\servermonitor.pdb
